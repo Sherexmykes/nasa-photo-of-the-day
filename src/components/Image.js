@@ -1,17 +1,30 @@
 import React from "react";
-import { Button } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Image({imgURL,imgTitle,description}) {
-    return  (
-        <div className = "image">
-            <h2>{imgTitle}</h2>
-            <img src = {imgURL} alt="description" />
-            <p>{description}</p>
-            <br></br>
-            <Button color="primary" size="lg" active>Learn More</Button>{' '}
 
-        </div>
-    );
-} 
-
+import { Segment } from "semantic-ui-react";
+export default function Image({imgURL,imgTitle,description,showContent}) {
+    console.log(showContent)
+    if(showContent) {
+        return (
+            <div className = "img-card">
+                <h2>{imgTitle}</h2>
+                <Image src = {imgURL} alt = "nasa image of day" />
+                
+                <Segment className="ui raised segment" >
+                    <p>{description}</p>
+                </Segment>
+                <br></br>
+           
+                </div>
+        )
+    }
+    else {
+        return (
+            <div className = "img-card">
+                <h2>{imgTitle}</h2>
+                <Image src = {imgURL} alt = "nasa image of day" />
+                <br></br>
+            </div>
+        )
+    }
+}

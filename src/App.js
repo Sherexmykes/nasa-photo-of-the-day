@@ -4,15 +4,26 @@ import axios from "axios";
 import Header from "./components/Header";
 import Image from "./components/Image";
 import { Button } from 'reactstrap';
+
+import Loader from "./components/Loader";
+
 function App() {
   const[photo,setPhoto] = useState();
   const[title,setTitle] = useState();
   const[info,setInfo] = useState();
   const[date,setDate] = useState();
 
+
+  // for toggling info content
+  const [showContent, setShowContent] = useState(false);
+  const toggleMode = e => {
+    e.preventDefault();
+    setShowContent(!showContent);
+  };
+
   useEffect(() => {
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`)
+    .get(`https://api.nasa.gov/planetary/apod?api_key=wQe8tiUEu5Y5nDLpRryKo8aelQSCQOdYarI7uNoC`)
       .then( response => {
         const dailyImg = response.data.url;
         console.log("image url: ",dailyImg);
@@ -35,8 +46,9 @@ function App() {
     <div className="App">
      
       <Header date = {date} />
-      <Button/>
-      <Image imgURL ={photo} imgTitle = {title} description = {info}/>
+      <Button type="primary" onClick={toggleMode}>Show more info</Button>
+      <Image imgURL ={photo} imgTitle = {title} description = {info}showContent = {showContent}/>/>
+      <Loader/>
     </div>
   );
 }
